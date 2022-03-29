@@ -5,6 +5,10 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const morgan = require('morgan');
+const db = require('./config/db');
+
+// Connect sau khi import từ db/index.js
+db.connect();
 
 // require routes folder
 const route = require('./routes');
