@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+lint-staged
+lint-staged
+lint-staged
+npm run beautiful
+npm run beautiful
