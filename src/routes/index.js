@@ -6,8 +6,8 @@ function route(app) {
     //     res.render('home');
     // });
 
-    // use chay ham siteRouter
-    app.use('/', siteRouter);
+    // get chay ham siteRouter
+    app.get('/', siteRouter);
 }
 
 module.exports = route;

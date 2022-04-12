@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Khởi tạo Schema 
 const Course = new Schema({
     name: {type: String},
     description: {type: String},
@@ -9,4 +10,5 @@ const Course = new Schema({
     updatedAt: {type: Date, default: Date.now},
 });
 
+// export để dùng cho controller tương tác
 module.exports = mongoose.model('Course', Course);

@@ -5,11 +5,10 @@ async function connect() {
     try {
         await mongoose.connect('mongodb://localhost:27017/learning');
         console.log('connect successfully');
-    }
-    catch(error) {
+    } catch (error) {
         console.log('cannot connect');
     }
 }
 
-// export để dùng cho kết nối 
-module.exports = {connect};
+// export để dùng cho kết nối
+module.exports = { connect };
