@@ -29,9 +29,11 @@
     "\"src/**/*.{js,scss,json}\"": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
-    "mongoose": "^6.2.9"
+    "mongoose": "^6.2.9",
+    "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
     "husky": "^7.0.4",

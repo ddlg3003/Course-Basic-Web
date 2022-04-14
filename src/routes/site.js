@@ -10,4 +10,3 @@ router.get('/', siteController.index);
 
 // Xuat value cua router ra va dung cho routes/index
 module.exports = router;
-    
