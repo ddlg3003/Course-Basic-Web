@@ -6,6 +6,7 @@ const app = express();
 const port = 3000;
 const morgan = require('morgan');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 
 // Connect sau khi import từ db/index.js
 db.connect();
@@ -34,6 +35,9 @@ app.engine(
     engine({
         // Rut gon duoi file
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b,
+        }
     }),
 );
 app.set('view engine', 'hbs');
@@ -44,6 +48,8 @@ app.use(morgan('combined'));
 
 //  Routes init --> routes/index.js --> home.js --> homeController.js
 route(app);
+
+app.use(methodOverride('_method'));
 
 // Listen the port
 app.listen(port, () => {

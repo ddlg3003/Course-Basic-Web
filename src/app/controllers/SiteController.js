@@ -16,11 +16,11 @@ class SiteController {
         //         next();
         // });
         Course.find({})
-            .then(courses => {
+            .then((courses) => {
                 // Biến course thành Object để truy xuất (HandleBar không cho phép
                 // truy xuất thuộc tính trực tiếp)
                 courses = multipleMongooseToObject(courses);
-                res.render('home', {courses});
+                res.render('home', { courses });
             })
             .catch(next);
     }
