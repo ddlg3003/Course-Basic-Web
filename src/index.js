@@ -1,4 +1,7 @@
 // require handlebars {engine}
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}  
 const { engine } = require('express-handlebars');
 const path = require('path');
 const express = require('express');
@@ -7,6 +10,17 @@ const port = 3000;
 const morgan = require('morgan');
 const db = require('./config/db');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const passport = require('passport');
+const flash = require('express-flash');
+
+app.use(session(
+    { secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }
+))
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 // Connect sau khi import từ db/index.js
 db.connect();
@@ -37,7 +51,7 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
-        }
+        },
     }),
 );
 app.set('view engine', 'hbs');

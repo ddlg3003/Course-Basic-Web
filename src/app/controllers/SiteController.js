@@ -4,23 +4,12 @@ const { multipleMongooseToObject } = require('../../util/mongoose');
 class SiteController {
     // [GET] /home
     index(req, res, next) {
-        // res.render('home');
-
-        // controller gửi yêu cầu đến models để lấy dữ liệu
-        // Course.find({}, function(err, courses) {
-        //     if (!err){
-        //         res.json(courses);
-        //         return;
-        //     }
-        //     else
-        //         next();
-        // });
         Course.find({})
-            .then((courses) => {
+            .then((courses) => {    
                 // Biến course thành Object để truy xuất (HandleBar không cho phép
                 // truy xuất thuộc tính trực tiếp)
                 courses = multipleMongooseToObject(courses);
-                res.render('home', { courses });
+                res.render('home', { courses, name: req.user.username });
             })
             .catch(next);
     }

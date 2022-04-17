@@ -5,7 +5,12 @@ class MeController {
     // [GET] /me/my-courses
     myCourses(req, res, next) {
         Course.find({})
-            .then(courses => res.render('me/myCourses', {courses: multipleMongooseToObject(courses)}))
+            .then((courses) =>
+                res.render('me/myCourses', {
+                    courses: multipleMongooseToObject(courses),
+                    name: req.user.username 
+                }),
+            )
             .catch(next);
     }
 }

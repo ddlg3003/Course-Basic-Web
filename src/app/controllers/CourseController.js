@@ -9,6 +9,7 @@ class CourseController {
                 // res.send(req.params.slug);
                 res.render('courses/show', {
                     course: mongooseToObject(course),
+                    name: req.user.username 
                 });
             })
             .catch(next);
@@ -16,7 +17,7 @@ class CourseController {
 
     //[GET] /courses/create
     create(req, res, next) {
-        res.render('courses/create');
+        res.render('courses/create', { name: req.user.username });
     }
 
     //[POST] /courses/done - Done create course
@@ -34,13 +35,18 @@ class CourseController {
     //[GET] /courses/:id/edit
     edit(req, res, next) {
         Course.findById(req.params.id)
-            .then(course => res.render('courses/edit', {course: mongooseToObject(course)}))
+            .then((course) =>
+                res.render('courses/edit', {
+                    course: mongooseToObject(course),
+                    name: req.user.username 
+                }),
+            )
             .catch(next);
     }
 
     // [PUT] /courses/:id
     update(req, res, next) {
-        Course.updateOne({_id: req.params.id}, req.body)
+        Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/my-courses'))
             .catch(next);
     }
