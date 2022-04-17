@@ -11,7 +11,8 @@ class SiteController {
                 courses = multipleMongooseToObject(courses);
                 if (req.isAuthenticated())
                     res.render('home', { courses, name: req.user.username });
-                res.render('home', { courses });
+                else
+                    res.render('home', { courses });
             })
             .catch(next);
     }

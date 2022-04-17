@@ -43,10 +43,7 @@ router.post(
     }),
     authController.doneLogin,
 );
-router.post(
-    '/register',
-    authController.doneRegister,
-);
+router.post('/register', authController.doneRegister);
 router.get('/login', auth.checkNotAuthenticated, authController.login);
 router.post('/logout', authController.logout);
 router.get('/register', auth.checkNotAuthenticated, authController.register);
