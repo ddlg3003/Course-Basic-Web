@@ -4,7 +4,6 @@ const siteRouter = require('./site');
 const meRouter = require('./me');
 const authRouter = require('./authenticate');
 
-
 function route(app) {
     app.use('/me', meRouter);
     app.use('/auth', authRouter);

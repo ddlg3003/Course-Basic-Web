@@ -7,10 +7,14 @@ class CourseController {
         Course.findOne({ slug: req.params.slug })
             .then((course) => {
                 // res.send(req.params.slug);
-                res.render('courses/show', {
-                    course: mongooseToObject(course),
-                    name: req.user.username 
-                });
+                if (req.isAuthenticated()) {
+                        res.render('courses/show', {
+                        course: mongooseToObject(course),
+                        name: req.user.username,
+                    })
+                }
+                else 
+                    res.render('courses/show', { course: mongooseToObject(course) });   
             })
             .catch(next);
     }
@@ -35,12 +39,11 @@ class CourseController {
     //[GET] /courses/:id/edit
     edit(req, res, next) {
         Course.findById(req.params.id)
-            .then((course) =>
+            .then((course) => 
                 res.render('courses/edit', {
-                    course: mongooseToObject(course),
-                    name: req.user.username 
-                }),
-            )
+                     course: mongooseToObject(course),
+                    name: req.user.username,
+            }))
             .catch(next);
     }
 

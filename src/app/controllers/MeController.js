@@ -8,7 +8,7 @@ class MeController {
             .then((courses) =>
                 res.render('me/myCourses', {
                     courses: multipleMongooseToObject(courses),
-                    name: req.user.username 
+                    name: req.user.username,
                 }),
             )
             .catch(next);

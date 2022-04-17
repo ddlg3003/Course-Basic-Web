@@ -7,7 +7,7 @@ const auth = require('../config/middleware/auth');
 const siteController = require('../app/controllers/SiteController');
 
 // Chay vao siteController.index va render ra home.hbs
-router.get('/', auth.checkAuthenticated, siteController.index);
+router.get('/', siteController.index);
 
 // Xuat value cua router ra va dung cho routes/index
 module.exports = router;

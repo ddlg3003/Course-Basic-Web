@@ -5,11 +5,13 @@ class SiteController {
     // [GET] /home
     index(req, res, next) {
         Course.find({})
-            .then((courses) => {    
+            .then((courses) => {
                 // Biến course thành Object để truy xuất (HandleBar không cho phép
                 // truy xuất thuộc tính trực tiếp)
                 courses = multipleMongooseToObject(courses);
-                res.render('home', { courses, name: req.user.username });
+                if (req.isAuthenticated())
+                    res.render('home', { courses, name: req.user.username });
+                res.render('home', { courses });
             })
             .catch(next);
     }

@@ -1,7 +1,7 @@
 // require handlebars {engine}
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-}  
+    require('dotenv').config();
+}
 const { engine } = require('express-handlebars');
 const path = require('path');
 const express = require('express');
@@ -14,9 +14,16 @@ const session = require('express-session');
 const passport = require('passport');
 const flash = require('express-flash');
 
-app.use(session(
-    { secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }
-))
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        // cookie: {
+        //     expires: 3000000,
+        // }
+    }),
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
