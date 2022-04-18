@@ -1,4 +1,5 @@
 const Course = require('../models/Course');
+const User = require('../models/User');
 const { mongooseToObject } = require('../../util/mongoose');
 
 class CourseController {
@@ -54,6 +55,18 @@ class CourseController {
         Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/my-courses'))
             .catch(next);
+    }
+
+    // [PUT] /courses/add
+    add(req, res, next) {
+        console.log(req.params.name);
+        User.findOneAndUpdate(
+                { _id: req.user._id },
+                { $addToSet: { mycourses: req.params.name } }
+            )
+            .then(() => res.redirect('/me/my-courses'))
+            .catch(next);
+        
     }
 }
 // Export value of this file

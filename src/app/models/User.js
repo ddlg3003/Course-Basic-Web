@@ -4,9 +4,10 @@ const Schema = mongoose.Schema;
 // Khởi tạo Schema
 const User = new Schema(
     {
-        username: { type: String },
+        username: { type: String, unique: true },
         email: { type: String },
         password: { type: String },
+        mycourses: { type: Array, default: [] },
         // createdAt: { type: Date, default: Date.now },
         // updatedAt: { type: Date, default: Date.now },
     },

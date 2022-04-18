@@ -5,12 +5,10 @@ const bcrypt = require('bcrypt');
 class AuthController {
     // [GET] auth/login
     login(req, res) {
-        // Check query neu la home thi set return la home, neu khong 
+        // Check query neu la home thi set return la home, neu khong
         // set query la referer
-        if( req.query.origin )
-            req.session.returnTo = req.query.origin;
-        else
-            req.session.returnTo = req.header('Referer');
+        if (req.query.origin) req.session.returnTo = req.query.origin;
+        else req.session.returnTo = req.header('Referer');
 
         res.render('auth/login', { layout: false });
     }
@@ -41,8 +39,8 @@ class AuthController {
         let returnTo = '/';
         // Neu co trang truoc do thi return, sau do xoa session
         if (req.session.returnTo) {
-          returnTo = req.session.returnTo;
-          delete req.session.returnTo;
+            returnTo = req.session.returnTo;
+            delete req.session.returnTo;
         }
         res.redirect(returnTo);
     }

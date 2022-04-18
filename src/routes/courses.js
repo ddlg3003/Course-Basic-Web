@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../config/middleware/auth');
 const courseController = require('../app/controllers/CourseController');
 
+router.post('/:name/add', auth.checkAuthenticated, courseController.add);
 router.get('/create', auth.checkAuthenticated, courseController.create);
 router.post('/done', courseController.done);
 router.get('/:id/edit', auth.checkAuthenticated, courseController.edit);
