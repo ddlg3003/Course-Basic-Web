@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 class AuthController {
     // [GET] auth/login
     login(req, res) {
-        // Check query goc, sau do set query se return
+        // Check query neu la home thi set return la home, neu khong 
+        // set query la referer
         if( req.query.origin )
             req.session.returnTo = req.query.origin;
         else
@@ -43,7 +44,6 @@ class AuthController {
           returnTo = req.session.returnTo;
           delete req.session.returnTo;
         }
-      
         res.redirect(returnTo);
     }
 
