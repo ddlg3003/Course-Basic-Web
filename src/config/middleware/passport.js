@@ -30,14 +30,13 @@ function initializePassportLogin(passport) {
 }
 
 function checkRegisterUsername(req, res, next) {
-    User.findOne({ username: req.body.username }, async function(err, user) {
+    User.findOne({ username: req.body.username }, async function (err, user) {
         if (err) {
             // Do sth
         }
         if (!user) {
             next();
-        }
-        else {
+        } else {
             await req.flash('error', 'Username đã tồn tại!');
             res.redirect('/auth/register');
         }
@@ -45,14 +44,13 @@ function checkRegisterUsername(req, res, next) {
 }
 
 function checkRegisterEmail(req, res, next) {
-    User.findOne({ email: req.body.email }, async function(err, user) {
+    User.findOne({ email: req.body.email }, async function (err, user) {
         if (err) {
             // Do sth
         }
         if (!user) {
             next();
-        }
-        else {
+        } else {
             await req.flash('error', 'Email đã tồn tại!');
             res.redirect('/auth/register');
         }
@@ -63,13 +61,11 @@ async function checkPassword(req, res, next) {
     if (req.body.password !== req.body.rePassword) {
         await req.flash('error', 'Mật khẩu nhập lại không khớp!');
         res.redirect('/auth/register');
-    }
-    else
-        next();
+    } else next();
 }
 
-module.exports = { 
-    initializePassportLogin, 
+module.exports = {
+    initializePassportLogin,
     checkRegisterUsername,
     checkRegisterEmail,
     checkPassword,

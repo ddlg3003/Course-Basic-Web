@@ -11,7 +11,7 @@ class CourseController {
                 if (req.isAuthenticated()) {
                     res.render('courses/show', {
                         course: mongooseToObject(course),
-                        name: req.user.username,
+                        user: mongooseToObject(req.user),
                     });
                 } else
                     res.render('courses/show', {
@@ -23,7 +23,7 @@ class CourseController {
 
     //[GET] /courses/create
     create(req, res, next) {
-        res.render('courses/create', { name: req.user.username });
+        res.render('courses/create', { user: mongooseToObject(req.user) });
     }
 
     //[POST] /courses/done - Done create course
@@ -44,7 +44,7 @@ class CourseController {
             .then((course) =>
                 res.render('courses/edit', {
                     course: mongooseToObject(course),
-                    name: req.user.username,
+                    user: mongooseToObject(req.user),
                 }),
             )
             .catch(next);

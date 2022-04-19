@@ -1,6 +1,6 @@
 const Course = require('../models/Course');
 const User = require('../models/User');
-const { multipleMongooseToObject } = require('../../util/mongoose');
+const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
 class MeController {
     // [GET] /me/my-courses
@@ -9,7 +9,7 @@ class MeController {
             .then((courses) =>
                 res.render('me/myCourses', {
                     courses: multipleMongooseToObject(courses),
-                    name: req.user.username,
+                    user: mongooseToObject(req.user),
                 }),
             )
             .catch(next);

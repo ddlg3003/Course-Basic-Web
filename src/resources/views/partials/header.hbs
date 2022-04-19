@@ -7,15 +7,15 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-        {{#unless name}}
+        {{#unless user}}
           <li>
             <a type="button" class="btn btn-light" href="/auth/login">Đăng nhập</a>
           </li>
         {{/unless}}
-        {{#if name}}
+        {{#if user}}
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-              {{name}}
+              <img src="{{user.avatar}}" alt="" class="user-avatar"> {{user.username}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/courses/create">Đăng khoá học</a>
