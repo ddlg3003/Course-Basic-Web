@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../../app/models/User');
 const bcrypt = require('bcrypt');
 
-function initializePassport(passport) {
+function initializePassportLogin(passport) {
     passport.use(
         new LocalStrategy(function (username, password, done) {
             User.findOne({ username: username }, async function (err, user) {
@@ -29,4 +29,48 @@ function initializePassport(passport) {
     });
 }
 
-module.exports = { initializePassport };
+function checkRegisterUsername(req, res, next) {
+    User.findOne({ username: req.body.username }, async function(err, user) {
+        if (err) {
+            // Do sth
+        }
+        if (!user) {
+            next();
+        }
+        else {
+            await req.flash('error', 'Username đã tồn tại!');
+            res.redirect('/auth/register');
+        }
+    });
+}
+
+function checkRegisterEmail(req, res, next) {
+    User.findOne({ email: req.body.email }, async function(err, user) {
+        if (err) {
+            // Do sth
+        }
+        if (!user) {
+            next();
+        }
+        else {
+            await req.flash('error', 'Email đã tồn tại!');
+            res.redirect('/auth/register');
+        }
+    });
+}
+
+async function checkPassword(req, res, next) {
+    if (req.body.password !== req.body.rePassword) {
+        await req.flash('error', 'Mật khẩu nhập lại không khớp!');
+        res.redirect('/auth/register');
+    }
+    else
+        next();
+}
+
+module.exports = { 
+    initializePassportLogin, 
+    checkRegisterUsername,
+    checkRegisterEmail,
+    checkPassword,
+};

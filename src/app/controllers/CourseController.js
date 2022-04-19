@@ -59,14 +59,11 @@ class CourseController {
 
     // [PUT] /courses/add
     add(req, res, next) {
-        console.log(req.params.name);
-        User.findOneAndUpdate(
-                { _id: req.user._id },
-                { $addToSet: { mycourses: req.params.name } }
-            )
+        req.user.mycourses.push(req.params.name);
+        const newCourses = req.user.mycourses;
+        User.updateOne({ _id: req.user._id }, { mycourses: newCourses })
             .then(() => res.redirect('/me/my-courses'))
             .catch(next);
-        
     }
 }
 // Export value of this file
