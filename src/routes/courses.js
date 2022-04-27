@@ -4,7 +4,12 @@ const auth = require('../config/middleware/auth');
 const { isAdminLogin, isUserLogin } = require('../config/middleware/passport');
 const courseController = require('../app/controllers/CourseController');
 
-router.post('/:name/add', auth.checkAuthenticated, isUserLogin, courseController.add);
+router.post(
+    '/:name/add',
+    auth.checkAuthenticated,
+    isUserLogin,
+    courseController.add,
+);
 // Admin only
 router.get(
     '/create',

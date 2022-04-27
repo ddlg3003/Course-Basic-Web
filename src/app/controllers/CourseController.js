@@ -62,7 +62,10 @@ class CourseController {
 
     // [PUT] /courses/add
     add(req, res, next) {
-        User.updateOne({ _id: req.user._id }, { $addToSet: { mycourses: req.params.name } })
+        User.updateOne(
+            { _id: req.user._id },
+            { $addToSet: { mycourses: req.params.name } },
+        )
             .then(() => res.redirect('/me/my-courses'))
             .catch(next);
     }
