@@ -66,12 +66,10 @@ async function checkPassword(req, res, next) {
 
 function isAdminLogin(req, res, next) {
     User.findOne({ username: req.user.username }, (err, user) => {
-        if (err) 
-            res.redirect('/auth/login');
+        if (err) res.redirect('/auth/login');
         else if (user.role === 'admin') {
             next();
-        }   
-        else if (user.role === 'user') {
+        } else if (user.role === 'user') {
             res.redirect('/');
         }
     });
@@ -79,12 +77,10 @@ function isAdminLogin(req, res, next) {
 
 function isUserLogin(req, res, next) {
     User.findOne({ username: req.user.username }, (err, user) => {
-        if (err) 
-            res.redirect('/auth/login');
+        if (err) res.redirect('/auth/login');
         else if (user.role === 'admin') {
             res.redirect('/');
-        }   
-        else if (user.role === 'user') {
+        } else if (user.role === 'user') {
             next();
         }
     });

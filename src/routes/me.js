@@ -5,6 +5,11 @@ const { isUserLogin } = require('../config/middleware/passport');
 
 const meController = require('../app/controllers/MeController');
 
-router.get('/my-courses', auth.checkAuthenticated, isUserLogin, meController.myCourses);
+router.get(
+    '/my-courses',
+    auth.checkAuthenticated,
+    isUserLogin,
+    meController.myCourses,
+);
 
 module.exports = router;

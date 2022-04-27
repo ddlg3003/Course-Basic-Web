@@ -3,7 +3,7 @@
     <table class="table mycourse-container">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="col-index">#</th>
             <th scope="col">Tên</th>
             <th scope="col">Ngày tạo</th>
             <th scope="col" colspan="2">Ngày cập nhật</th>
@@ -12,7 +12,7 @@
     <tbody>
         {{#each courses}}
         <tr>
-            <th scope="row">{{sum @index 1}}</th>
+            <th scope="row" class="col-index">{{sum @index 1}}</th>
             <td>{{this.name}}</td>
             <td>{{this.createdAt}}</td>
             <td>{{this.updatedAt}}</td>

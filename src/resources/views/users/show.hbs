@@ -3,7 +3,6 @@
     <table class="table mycourse-container">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col" colspan="2">Role</th>
@@ -12,13 +11,12 @@
     <tbody>
         {{#each users}}
         <tr>
-            <th scope="row">{{sum @index 1}}</th>
             <td>{{this.username}}</td>
             <td>{{this.email}}</td>
             <td>{{this.role}}</td>
             <td>
                 {{!-- <a href="/courses/{{this._id}}/edit" class="btn btn-dark">Sửa</a> --}}
-                <a href="" class="btn btn-dark">Trao quyền admin</a>
+                <a href="" class="btn btn-dark">Sửa quyền</a>
                 <a href="" class="btn btn-dark mt-1">Chặn</a>
             </td>
         </tr>
