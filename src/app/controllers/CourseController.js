@@ -1,6 +1,6 @@
 const Course = require('../models/Course');
 const User = require('../models/User');
-const { mongooseToObject } = require('../../util/mongoose');
+const { mongooseToObject, multipleMongooseToObject } = require('../../util/mongoose');
 
 class CourseController {
     // [GET] /courses/:slug
@@ -53,7 +53,7 @@ class CourseController {
     // [PUT] /courses/:id
     update(req, res, next) {
         Course.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/me/my-courses'))
+            .then(() => res.redirect('/courses/list'))
             .catch(next);
     }
 
@@ -63,6 +63,23 @@ class CourseController {
         const newCourses = req.user.mycourses;
         User.updateOne({ _id: req.user._id }, { mycourses: newCourses })
             .then(() => res.redirect('/me/my-courses'))
+            .catch(next);
+    }
+
+    // [GET] /courses/list
+    list(req, res, next) {
+        Course.find()
+            .then((courses) => {
+                if (req.isAuthenticated())
+                    res.render('courses/list', {
+                        courses: multipleMongooseToObject(courses),
+                        user: mongooseToObject(req.user)
+                    })
+                else 
+                    res.render('courses/list', {
+                        courses: multipleMongooseToObject(courses)
+                    })
+            })
             .catch(next);
     }
 }

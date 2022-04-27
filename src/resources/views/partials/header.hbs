@@ -17,10 +17,22 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
               <img src="{{user.avatar}}" alt="" class="user-avatar"> {{user.username}}
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/courses/create">Đăng khoá học</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/me/my-courses">Khoá học của tôi</a>
+            {{#ifeq user.role 'admin'}}
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/">Trang cá nhân admin</a>
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/courses/create">Thêm khoá học</a>
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/courses/list">Danh sách khoá học</a>
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/users">Danh sách người dùng</a>       
+            {{/ifeq}}
+            {{#ifeq user.role 'user'}}
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/">Trang cá nhân</a>
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/me/my-courses">Khoá học của tôi</a>
+            {{/ifeq}}
             <div class="dropdown-divider"></div>
             <form action="/auth/logout?_method=DELETE" method="POST">
               <button class="dropdown-item" type="submit">Đăng xuất</button>

@@ -23,7 +23,6 @@ class AuthController {
             const formData = req.body;
             formData.password = await bcrypt.hash(req.body.password, 10);
             const user = new User(formData);
-            console.log(user);
             user.save()
                 .then(() => {
                     res.redirect('/auth/login');
@@ -34,6 +33,7 @@ class AuthController {
         }
     }
 
+    // [POST] auth/login
     doneLogin(req, res) {
         let returnTo = '/';
         // Neu co trang truoc do thi return, sau do xoa session

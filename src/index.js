@@ -58,6 +58,12 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
+            ifeq: (a, b, opts) => {
+                if(a === b)
+                    return opts.fn(this);
+                else
+                    return opts.inverse(this);
+            }
         },
     }),
 );

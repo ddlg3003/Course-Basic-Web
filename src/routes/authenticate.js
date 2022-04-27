@@ -7,6 +7,7 @@ const {
     initializePassportLogin,
     checkRegisterEmail,
     checkPassword,
+    isAdminLogin,
 } = require('../config/middleware/passport');
 const authController = require('../app/controllers/AuthController');
 const passport = require('passport');

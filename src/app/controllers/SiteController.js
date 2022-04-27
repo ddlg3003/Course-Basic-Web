@@ -5,7 +5,7 @@ const {
 } = require('../../util/mongoose');
 
 class SiteController {
-    // [GET] /home
+    // [GET] /
     index(req, res, next) {
         Course.find({})
             .then((courses) => {
