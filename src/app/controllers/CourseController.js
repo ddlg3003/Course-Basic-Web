@@ -60,7 +60,7 @@ class CourseController {
             .catch(next);
     }
 
-    // [PUT] /courses/add
+    // [PUT] /courses/:name/add
     add(req, res, next) {
         User.updateOne(
             { _id: req.user._id },
@@ -89,7 +89,7 @@ class CourseController {
 
     // [DELETE] /courses/:id
     destroy(req, res, next) {
-        Course.deleteOne({ id: req.params._id })
+        Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('/courses/list'))
             .catch(next);
     }
