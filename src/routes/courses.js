@@ -18,12 +18,19 @@ router.get(
     courseController.create,
 );
 router.post('/done', courseController.done);
-// Admin only
+// Admin only 
 router.get(
     '/:id/edit',
     auth.checkAuthenticated,
     isAdminLogin,
     courseController.edit,
+);
+// Delete
+router.post(
+    '/:id',
+    auth.checkAuthenticated,
+    isAdminLogin,
+    courseController.destroy,
 );
 // PUT
 router.get(

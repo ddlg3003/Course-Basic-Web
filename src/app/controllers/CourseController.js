@@ -86,6 +86,13 @@ class CourseController {
             })
             .catch(next);
     }
+
+    // [DELETE] /courses/:id
+    destroy(req, res, next) {
+        Course.deleteOne({ id: req.params._id })
+            .then(() => res.redirect('/courses/list'))
+            .catch(next);
+    }
 }
 // Export value of this file
 module.exports = new CourseController();

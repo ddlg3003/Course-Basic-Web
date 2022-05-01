@@ -19,10 +19,55 @@
             <td>
                 {{!-- <a href="/courses/{{this._id}}/edit" class="btn btn-dark">Sửa</a> --}}
                 <a href="/courses/{{this._id}}/edit" class="btn btn-dark">Sửa</a>
-                <a href="" class="btn btn-dark mt-1">Xoá</a>
+                <a href="" class="btn btn-dark mt-1" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Xoá</a>
             </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 </div>
+
+{{!-- Delete form --}}
+<form id="delete-form" method="post"></form>
+
+{{!-- Confirm delete --}}
+<div id="delete-course-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xoá khoá học?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc muốn xoá không?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-delete-course" class="btn btn-danger">Xoá</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // When DOMContentLoaded then run Jquery code below
+    document.addEventListener('DOMContentLoaded', function() {
+        var id;
+        const deleteForm = document.querySelector('#delete-form');
+        const btnDeleteCourse = document.querySelector('#btn-delete-course');
+
+        // Get the Course id from the button
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            id = button.data('id'); 
+        });
+
+        // Set action for delete form when click delete button 
+        btnDeleteCourse.onclick = function (event) {
+            deleteForm.action = '/courses/' + id + '?_method=DELETE';
+            deleteForm.submit();
+        }
+    })
+</script>

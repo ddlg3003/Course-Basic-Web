@@ -20,9 +20,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            httpOnly: true, 
+            httpOnly: true,
             maxAge: 36000000,
-        }
+        },
     }),
 );
 

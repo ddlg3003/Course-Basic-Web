@@ -30,6 +30,7 @@ function initializePassportLogin(passport) {
 }
 
 async function checkRegisterUsername(req, res, next) {
+    // Have at least 6 characters can include digit, character and uppercase
     const validUsername = /^[0-9a-zA-Z]{6,}$/;
     if (!req.body.username.match(validUsername)) {
         await req.flash('error', 'Username không đúng định dạng!');
@@ -74,6 +75,8 @@ async function checkRegisterEmail(req, res, next) {
 }
 
 async function checkPassword(req, res, next) {
+    // Must have digit, charater, uppercase character, must have all 3 of em
+    // must have special character and length is between 8 - 15
     const validPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
     if(!req.body.password.match(validPassword)) {
         await req.flash('error', 'Mật khẩu không có đủ các điều kiện yêu cầu!');
